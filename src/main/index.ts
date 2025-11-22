@@ -1,10 +1,21 @@
 import { app, BrowserWindow } from 'electron'
 import { WindowManager } from './managers/WindowManager'
+import { StorageManager } from './managers/StorageManager'
+import { WorkspaceManager } from './managers/WorkspaceManager'
+import { TabManager } from './managers/TabManager'
+import { WebViewPoolManager } from './managers/WebViewPoolManager'
+import { IPCHandler } from './ipc/IPCHandler'
 
 const windowManager = new WindowManager()
+const storage = new StorageManager()
+const workspaceManager = new WorkspaceManager(storage)
+const tabManager = new TabManager(storage)
+const webViewPool = new WebViewPoolManager(windowManager)
+const ipcHandler = new IPCHandler(workspaceManager, tabManager, webViewPool, windowManager)
 
 app.whenReady().then(() => {
   windowManager.createMainWindow()
+  ipcHandler.register()
 })
 
 app.on('window-all-closed', () => {
