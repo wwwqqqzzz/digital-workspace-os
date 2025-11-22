@@ -21,7 +21,7 @@ export class WindowManager {
     });
     const htmlPath = path.resolve(
       app.getAppPath(),
-      "src",
+      "dist",
       "renderer",
       "index.html"
     );
