@@ -28,7 +28,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      templateContent: ({ htmlWebpackPlugin }) => `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Digital Workspace OS</title></head><body><div id="root"></div><script src="${htmlWebpackPlugin.files.js[0]}"></script></body></html>`
+      templateContent: `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Digital Workspace OS</title></head><body><div id="root"></div><script src="bundle.js"></script></body></html>`
     })
   ]
 }
