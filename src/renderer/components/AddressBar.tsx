@@ -15,7 +15,10 @@ export function AddressBar() {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!activeTabId || !url) return;
-    window.electronAPI?.tab?.navigate?.(activeTabId, url);
+    window.electronAPI?.tab?.navigate?.(activeTabId, url).then(res => {
+      if(res.ok) useAppStore.getState().addToast('success','Navigated');
+      else useAppStore.getState().addToast('error', res.error?.message || 'Navigate failed')
+    });
   };
 
   return (

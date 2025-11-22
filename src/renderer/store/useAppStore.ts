@@ -31,6 +31,9 @@ interface AppState {
   updateTab: (t: TabItem) => void;
   removeTab: (id: string) => void;
   reorderTabs: (ids: string[]) => void;
+  toasts: { id: string; type: 'success'|'error'|'info'; message: string }[];
+  addToast: (type: 'success'|'error'|'info', message: string) => void;
+  removeToast: (id: string) => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -56,4 +59,8 @@ export const useAppStore = create<AppState>((set) => ({
         .map((id) => s.tabs.find((x) => x.id === id))
         .filter(Boolean) as TabItem[],
     })),
+  toasts: [],
+  addToast: (type, message) =>
+    set((s) => ({ toasts: [...s.toasts, { id: `${Date.now()}-${Math.random()}`, type, message }] })),
+  removeToast: (id) => set((s) => ({ toasts: s.toasts.filter(t => t.id !== id) })),
 }));

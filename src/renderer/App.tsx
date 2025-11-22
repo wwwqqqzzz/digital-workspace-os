@@ -2,9 +2,10 @@ import React, { useEffect } from 'react'
 import { useAppStore } from './store/useAppStore'
 import { Sidebar } from './components/Sidebar'
 import { MainContent } from './components/MainContent'
+import { ToastList } from './components/ToastList'
 
 export function App() {
-  const { setWorkspaces, setActiveWorkspace, setTabs, setActiveTab, addTab, updateTab, removeTab, reorderTabs } = useAppStore()
+  const { setWorkspaces, setActiveWorkspace, setTabs, setActiveTab, addTab, updateTab, removeTab, reorderTabs, addToast } = useAppStore()
 
   useEffect(() => {
     if (window.electronAPI?.workspace?.list) {
@@ -23,6 +24,8 @@ export function App() {
               }
             })
           }
+        } else {
+          addToast('error', res.error?.message || 'Workspace list failed')
         }
       })
     }
@@ -44,6 +47,8 @@ export function App() {
           setTabs(tabs)
           const active = tabs.find(x => x.active)
           setActiveTab(active?.id)
+        } else {
+          addToast('error', tres.error?.message || 'Tab list failed')
         }
       })
     }
@@ -64,6 +69,7 @@ export function App() {
     <div className="flex h-screen">
       <Sidebar />
       <MainContent />
+      <ToastList />
     </div>
   )
 }

@@ -11,7 +11,16 @@ export function Sidebar() {
         {list.map((w) => (
           <button
             key={w.id}
-            onClick={() => window.electronAPI?.workspace?.activate?.(w.id)}
+            onClick={() =>
+              window.electronAPI?.workspace
+                ?.activate?.(w.id)
+                .then((res) => {
+                  if (!res.ok)
+                    useAppStore
+                      .getState()
+                      .addToast("error", res.error?.message || "Activate failed");
+                })
+            }
             className={`w-full text-left px-2 py-1 rounded ${
               activeWorkspaceId === w.id ? "bg-blue-100" : "hover:bg-gray-100"
             }`}
@@ -24,7 +33,16 @@ export function Sidebar() {
       <button
         className="mt-3 w-full bg-blue-600 text-white px-2 py-1 rounded"
         onClick={() =>
-          window.electronAPI?.workspace?.create?.({ name: "New Workspace" })
+          window.electronAPI?.workspace
+            ?.create?.({ name: "New Workspace" })
+            .then((res) => {
+              if (res.ok)
+                useAppStore.getState().addToast("success", "Workspace created");
+              else
+                useAppStore
+                  .getState()
+                  .addToast("error", res.error?.message || "Create failed");
+            })
         }
       >
         New Workspace
