@@ -1,26 +1,11 @@
 import { app, BrowserWindow } from 'electron'
-import path from 'node:path'
+import { WindowManager } from './managers/WindowManager'
 
-let mainWindow: BrowserWindow | null = null
+const windowManager = new WindowManager()
 
-function createMainWindow() {
-  mainWindow = new BrowserWindow({
-    width: 1400,
-    height: 900,
-    minWidth: 1280,
-    minHeight: 720,
-    webPreferences: {
-      preload: path.join(__dirname, '../preload/index.js'),
-      contextIsolation: true,
-      sandbox: true,
-      nodeIntegration: false
-    }
-  })
-  const htmlPath = path.resolve(__dirname, '..', '..', 'src', 'renderer', 'index.html')
-  mainWindow.loadFile(htmlPath)
-}
-
-app.whenReady().then(createMainWindow)
+app.whenReady().then(() => {
+  windowManager.createMainWindow()
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -30,6 +15,6 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
-    createMainWindow()
+    windowManager.createMainWindow()
   }
 })
