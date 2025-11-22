@@ -2,6 +2,7 @@ import { BrowserWindow, BrowserView, app } from "electron";
 import path from "node:path";
 
 const defaultSidebarWidth = 240;
+const defaultTopBarHeight = 76;
 
 export class WindowManager {
   private mainWindow: BrowserWindow | null = null;
@@ -44,9 +45,10 @@ export class WindowManager {
     if (!this.mainWindow) return;
     const [w, h] = this.mainWindow.getContentSize();
     const x = defaultSidebarWidth;
+    const y = defaultTopBarHeight;
     const width = Math.max(0, w - x);
-    const height = h;
-    view.setBounds({ x, y: 0, width, height });
+    const height = Math.max(0, h - y);
+    view.setBounds({ x, y, width, height });
   }
 
   attachResizeHandler() {

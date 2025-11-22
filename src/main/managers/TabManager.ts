@@ -55,7 +55,10 @@ export class TabManager extends EventEmitter {
     const wasActive = tabs[idx].active
     const removed = tabs.splice(idx, 1)[0]
     this.tabToWorkspace.delete(tabId)
-    if (wasActive && tabs.length > 0) tabs[0].active = true
+    if (wasActive && tabs.length > 0) {
+      tabs[0].active = true
+      this.emit('tab-activated', tabs[0])
+    }
     this.storage.saveTabs(wsId, tabs)
     this.emit('tab-closed', removed)
   }
