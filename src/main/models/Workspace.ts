@@ -30,3 +30,10 @@ export interface Workspace {
   createdAt: number
   lastAccessedAt: number
 }
+
+export interface WorkspaceConfig {
+  name: string
+  icon?: string
+  color?: string
+  settings?: WorkspaceSettings
+}
