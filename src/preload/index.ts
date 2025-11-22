@@ -14,6 +14,8 @@ const IPC_CHANNELS = {
   TAB_REORDER: "tab.reorder",
   TAB_LIST: "tab.list",
   TAB_EVENT: "tab.event",
+  UI_SET_TOPBAR_HEIGHT: "ui.setTopbarHeight",
+  UI_SET_CONTENT_BOUNDS: "ui.setContentBounds",
 } as const;
 
 type ErrorCode =
@@ -109,6 +111,13 @@ contextBridge.exposeInMainWorld("electronAPI", {
   onTabEvent: (handler: (event: { type: string; payload: any }) => void) => {
     ipcRenderer.on(IPC_CHANNELS.TAB_EVENT, (_e, data) => handler(data));
   },
+  onUiEvent: (handler: (event: { type: string; payload?: any }) => void) => {
+    ipcRenderer.on('ui.event', (_e, data) => handler(data))
+  },
+  ui: {
+    setTopBarHeight: (height: number) => invoke<{ height: number }, any>(IPC_CHANNELS.UI_SET_TOPBAR_HEIGHT, { height })
+    ,setContentBounds: (bounds: { x: number; y: number; width: number; height: number }) => invoke<{ x: number; y: number; width: number; height: number }, any>(IPC_CHANNELS.UI_SET_CONTENT_BOUNDS, bounds)
+  }
 });
 
 declare global {
@@ -146,6 +155,13 @@ declare global {
       onTabEvent?: (
         handler: (event: { type: string; payload: any }) => void
       ) => void;
+      onUiEvent?: (
+        handler: (event: { type: string; payload?: any }) => void
+      ) => void;
+      ui?: {
+        setTopBarHeight: (height: number) => Promise<IpcResponse<any>>
+        setContentBounds: (bounds: { x: number; y: number; width: number; height: number }) => Promise<IpcResponse<any>>
+      }
     };
   }
 }

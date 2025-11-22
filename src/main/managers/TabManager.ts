@@ -30,6 +30,13 @@ export class TabManager extends EventEmitter {
     for (const t of tabs) this.tabToWorkspace.set(t.id, workspaceId)
   }
 
+  getTabById(tabId: string): Tab | undefined {
+    const wsId = this.tabToWorkspace.get(tabId)
+    if (!wsId) return undefined
+    const tabs = this.getTabsForWorkspace(wsId)
+    return tabs.find(t => t.id === tabId)
+  }
+
   create(workspace: Workspace, url: string): Tab {
     const tabs = this.getTabsForWorkspace(workspace.id)
     const now = Date.now()

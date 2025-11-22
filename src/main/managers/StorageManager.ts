@@ -86,6 +86,24 @@ export class StorageManager {
     try { return JSON.parse(row.value) as T } catch { return undefined }
   }
 
+  listBookmarks(workspaceId: string): string[] {
+    const key = `bookmarks:${workspaceId}`
+    return (this.getSetting<string[]>(key) ?? [])
+  }
+
+  addBookmark(workspaceId: string, url: string) {
+    const key = `bookmarks:${workspaceId}`
+    const list = this.listBookmarks(workspaceId).filter(u => u !== url)
+    list.unshift(url)
+    this.setSetting(key, list.slice(0, 100))
+  }
+
+  removeBookmark(workspaceId: string, url: string) {
+    const key = `bookmarks:${workspaceId}`
+    const list = this.listBookmarks(workspaceId).filter(u => u !== url)
+    this.setSetting(key, list)
+  }
+
   loadWorkspace(id: string): Workspace | null {
     const row: any = this.db.prepare(`SELECT * FROM workspaces WHERE id = ?`).get(id)
     if (!row) return null

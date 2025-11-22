@@ -36,6 +36,9 @@ interface AppState {
   removeToast: (id: string) => void;
   history: string[];
   addHistory: (url: string) => void;
+  bookmarks: string[];
+  addBookmark: (url: string) => void;
+  removeBookmark: (url: string) => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -71,4 +74,12 @@ export const useAppStore = create<AppState>((set) => ({
     items.unshift(url)
     return { history: items.slice(0, 50) }
   }),
+  bookmarks: [],
+  addBookmark: (url) => set((s) => {
+    if (!url) return { bookmarks: s.bookmarks }
+    const items = s.bookmarks.filter((u) => u !== url)
+    items.unshift(url)
+    return { bookmarks: items.slice(0, 100) }
+  }),
+  removeBookmark: (url) => set((s) => ({ bookmarks: s.bookmarks.filter(u => u !== url) })),
 }));

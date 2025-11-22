@@ -11,3 +11,11 @@ export function ensureArrayOfStrings(value: unknown, min = 0): string[] {
   if (arr.length < min) throw new Error('VALIDATION_ERROR')
   return arr
 }
+
+export function ensureNumber(value: unknown, min?: number, max?: number): number {
+  if (typeof value !== 'number' || Number.isNaN(value)) throw new Error('VALIDATION_ERROR')
+  let n = value
+  if (typeof min === 'number') n = Math.max(min, n)
+  if (typeof max === 'number') n = Math.min(max, n)
+  return n
+}

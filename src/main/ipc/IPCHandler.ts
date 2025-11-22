@@ -5,7 +5,7 @@ import { WorkspaceManager } from '../managers/WorkspaceManager'
 import { TabManager } from '../managers/TabManager'
 import { WebViewPoolManager } from '../managers/WebViewPoolManager'
 import { WindowManager } from '../managers/WindowManager'
-import { ensureString, ensureArrayOfStrings } from '../../common/validation'
+import { ensureString, ensureArrayOfStrings, ensureNumber } from '../../common/validation'
 
 export class IPCHandler {
   constructor(
@@ -119,8 +119,18 @@ export class IPCHandler {
         const tabId = ensureString(req.payload.tabId)
         const url = ensureString(req.payload.url)
         this.tabManager.update(tabId, { url })
-        const view = this.webViewPool.getView(tabId)
-        if (view) view.webContents.loadURL(url)
+        let view = this.webViewPool.getView(tabId)
+        if (!view) {
+          const tab = this.tabManager.getTabById(tabId)
+          if (tab) {
+            const ws = this.workspaceManager.get(tab.workspaceId)
+            if (ws) view = this.webViewPool.create(tab, ws)
+          }
+        }
+        if (view) {
+          view.webContents.loadURL(url)
+          this.windowManager.setBrowserView(view)
+        }
         return { ok: true, data: { navigated: true }, correlationId: req.correlationId }
       } catch (err: any) {
         return { ok: false, error: { code: 'INTERNAL_ERROR', message: String(err?.message || err) }, correlationId: req.correlationId }
@@ -148,6 +158,71 @@ export class IPCHandler {
       } catch (err: any) {
         const msg = String(err?.message || err)
         return { ok: false, error: { code: 'INTERNAL_ERROR', message: msg }, correlationId: req.correlationId }
+      }
+    })
+
+    ipcMain.handle(IPC_CHANNELS.UI_SET_TOPBAR_HEIGHT, async (_e, req: IpcRequest<{ height: number }>): Promise<IpcResponse<any>> => {
+      try {
+        const height = ensureNumber(req.payload.height, 76, 400)
+        this.windowManager.setTopBarHeight(height)
+        return { ok: true, data: { updated: true }, correlationId: req.correlationId }
+      } catch (err: any) {
+        const msg = String(err?.message || err)
+        const code = msg === 'VALIDATION_ERROR' ? 'VALIDATION_ERROR' : 'INTERNAL_ERROR'
+        return { ok: false, error: { code, message: msg }, correlationId: req.correlationId }
+      }
+    })
+
+    ipcMain.handle(IPC_CHANNELS.UI_SET_CONTENT_BOUNDS, async (_e, req: IpcRequest<{ x: number; y: number; width: number; height: number }>): Promise<IpcResponse<any>> => {
+      try {
+        const x = ensureNumber(req.payload.x, 0)
+        const y = ensureNumber(req.payload.y, 0)
+        const width = ensureNumber(req.payload.width, 100)
+        const height = ensureNumber(req.payload.height, 100)
+        this.windowManager.setContentBounds({ x, y, width, height })
+        return { ok: true, data: { updated: true }, correlationId: req.correlationId }
+      } catch (err: any) {
+        const msg = String(err?.message || err)
+        const code = msg === 'VALIDATION_ERROR' ? 'VALIDATION_ERROR' : 'INTERNAL_ERROR'
+        return { ok: false, error: { code, message: msg }, correlationId: req.correlationId }
+      }
+    })
+
+    ipcMain.handle(IPC_CHANNELS.BOOKMARK_LIST, async (_e, req: IpcRequest<{ workspaceId: string }>): Promise<IpcResponse<any>> => {
+      try {
+        const wsId = ensureString(req.payload.workspaceId)
+        const list = this.webViewPool ? this.windowManager ? this.storage : null : null
+        const data = this.storage.listBookmarks(wsId)
+        return { ok: true, data, correlationId: req.correlationId }
+      } catch (err: any) {
+        const msg = String(err?.message || err)
+        return { ok: false, error: { code: 'INTERNAL_ERROR', message: msg }, correlationId: req.correlationId }
+      }
+    })
+
+    ipcMain.handle(IPC_CHANNELS.BOOKMARK_ADD, async (_e, req: IpcRequest<{ workspaceId: string; url: string }>): Promise<IpcResponse<any>> => {
+      try {
+        const wsId = ensureString(req.payload.workspaceId)
+        const url = ensureString(req.payload.url)
+        this.storage.addBookmark(wsId, url)
+        return { ok: true, data: { added: true }, correlationId: req.correlationId }
+      } catch (err: any) {
+        const msg = String(err?.message || err)
+        const code = msg === 'VALIDATION_ERROR' ? 'VALIDATION_ERROR' : 'INTERNAL_ERROR'
+        return { ok: false, error: { code, message: msg }, correlationId: req.correlationId }
+      }
+    })
+
+    ipcMain.handle(IPC_CHANNELS.BOOKMARK_REMOVE, async (_e, req: IpcRequest<{ workspaceId: string; url: string }>): Promise<IpcResponse<any>> => {
+      try {
+        const wsId = ensureString(req.payload.workspaceId)
+        const url = ensureString(req.payload.url)
+        this.storage.removeBookmark(wsId, url)
+        return { ok: true, data: { removed: true }, correlationId: req.correlationId }
+      } catch (err: any) {
+        const msg = String(err?.message || err)
+        const code = msg === 'VALIDATION_ERROR' ? 'VALIDATION_ERROR' : 'INTERNAL_ERROR'
+        return { ok: false, error: { code, message: msg }, correlationId: req.correlationId }
       }
     })
   }

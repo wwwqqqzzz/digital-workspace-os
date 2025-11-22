@@ -24,7 +24,12 @@ const eventBridge = new EventBridge(
   tabManager,
   windowManager
 );
-const shortcutManager = new ShortcutManager(workspaceManager, tabManager);
+const shortcutManager = new ShortcutManager(
+  workspaceManager,
+  tabManager,
+  windowManager,
+  webViewPool
+);
 
 app.whenReady().then(() => {
   windowManager.createMainWindow();

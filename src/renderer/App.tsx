@@ -62,6 +62,9 @@ export function App() {
       if (e.type === 'reordered') reorderTabs(e.payload.map((t: any) => t.id))
       if (e.type === 'activated') setActiveTab(e.payload.id)
       if (e.type === 'closed') removeTab(e.payload.id)
+      if (e.type === 'devtools-open') {
+        addToast('info','Opening DevTools for active tab')
+      }
   })
   }, [])
 
