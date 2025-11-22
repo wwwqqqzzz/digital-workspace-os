@@ -34,6 +34,8 @@ interface AppState {
   toasts: { id: string; type: 'success'|'error'|'info'; message: string }[];
   addToast: (type: 'success'|'error'|'info', message: string) => void;
   removeToast: (id: string) => void;
+  history: string[];
+  addHistory: (url: string) => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -63,4 +65,10 @@ export const useAppStore = create<AppState>((set) => ({
   addToast: (type, message) =>
     set((s) => ({ toasts: [...s.toasts, { id: `${Date.now()}-${Math.random()}`, type, message }] })),
   removeToast: (id) => set((s) => ({ toasts: s.toasts.filter(t => t.id !== id) })),
+  history: [],
+  addHistory: (url) => set((s) => {
+    const items = s.history.filter((u) => u !== url)
+    items.unshift(url)
+    return { history: items.slice(0, 50) }
+  }),
 }));
