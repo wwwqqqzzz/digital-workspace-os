@@ -26,7 +26,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     close: (tabId: string) => invoke<{ tabId: string }, any>(IPC_CHANNELS.TAB_CLOSE, { tabId }),
     activate: (tabId: string) => invoke<{ tabId: string }, any>(IPC_CHANNELS.TAB_ACTIVATE, { tabId }),
     navigate: (tabId: string, url: string) => invoke<{ tabId: string; url: string }, any>(IPC_CHANNELS.TAB_NAVIGATE, { tabId, url }),
-    reorder: (workspaceId: string, tabIds: string[]) => invoke<{ workspaceId: string; tabIds: string[] }, any>(IPC_CHANNELS.TAB_REORDER, { workspaceId, tabIds })
+    reorder: (workspaceId: string, tabIds: string[]) => invoke<{ workspaceId: string; tabIds: string[] }, any>(IPC_CHANNELS.TAB_REORDER, { workspaceId, tabIds }),
+    list: (workspaceId: string) => invoke<{ workspaceId: string }, any>(IPC_CHANNELS.TAB_LIST, { workspaceId })
   },
   onWorkspaceEvent: (handler: (event: { type: string; payload: any }) => void) => {
     ipcRenderer.on(IPC_CHANNELS.WORKSPACE_EVENT, (_e, data) => handler(data))
@@ -53,6 +54,7 @@ declare global {
         activate: (tabId: string) => Promise<IpcResponse<any>>
         navigate: (tabId: string, url: string) => Promise<IpcResponse<any>>
         reorder: (workspaceId: string, tabIds: string[]) => Promise<IpcResponse<any>>
+        list: (workspaceId: string) => Promise<IpcResponse<any>>
       }
       onWorkspaceEvent?: (handler: (event: { type: string; payload: any }) => void) => void
       onTabEvent?: (handler: (event: { type: string; payload: any }) => void) => void

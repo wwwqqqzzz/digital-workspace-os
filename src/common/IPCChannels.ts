@@ -10,6 +10,7 @@ export const IPC_CHANNELS = {
   TAB_ACTIVATE: 'tab.activate',
   TAB_NAVIGATE: 'tab.navigate',
   TAB_REORDER: 'tab.reorder',
+  TAB_LIST: 'tab.list',
   TAB_EVENT: 'tab.event'
 } as const
 

@@ -19,6 +19,17 @@ app.whenReady().then(() => {
   windowManager.createMainWindow()
   ipcHandler.register()
   eventBridge.register()
+  const existing = storage.loadAllWorkspaces()
+  if (existing.length === 0) {
+    const defaults = [
+      { name: 'Work', icon: '💼', color: '#3B82F6' },
+      { name: 'Personal', icon: '🏠', color: '#10B981' },
+      { name: 'Web3', icon: '🔗', color: '#8B5CF6' },
+      { name: 'Study', icon: '📚', color: '#F59E0B' }
+    ]
+    const created = defaults.map(cfg => workspaceManager.create(cfg))
+    workspaceManager.activate(created[0].id)
+  }
 })
 
 app.on('window-all-closed', () => {

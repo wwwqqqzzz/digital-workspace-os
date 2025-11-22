@@ -13,7 +13,7 @@ export class WindowManager {
       minWidth: 1280,
       minHeight: 720,
       webPreferences: {
-        preload: path.join(__dirname, "../preload/index.js"),
+        preload: path.resolve(app.getAppPath(), "dist", "preload", "index.js"),
         contextIsolation: true,
         sandbox: true,
         nodeIntegration: false,

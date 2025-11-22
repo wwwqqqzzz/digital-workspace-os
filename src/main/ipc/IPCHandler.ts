@@ -139,5 +139,16 @@ export class IPCHandler {
         return { ok: false, error: { code, message: msg }, correlationId: req.correlationId }
       }
     })
+
+    ipcMain.handle(IPC_CHANNELS.TAB_LIST, async (_e, req: IpcRequest<{ workspaceId: string }>): Promise<IpcResponse<any>> => {
+      try {
+        const workspaceId = ensureString(req.payload.workspaceId)
+        const tabs = this.tabManager.getTabsForWorkspace(workspaceId)
+        return { ok: true, data: tabs, correlationId: req.correlationId }
+      } catch (err: any) {
+        const msg = String(err?.message || err)
+        return { ok: false, error: { code: 'INTERNAL_ERROR', message: msg }, correlationId: req.correlationId }
+      }
+    })
   }
 }
