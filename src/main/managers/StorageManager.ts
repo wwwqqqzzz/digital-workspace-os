@@ -42,6 +42,11 @@ export class StorageManager {
       );
       CREATE INDEX IF NOT EXISTS idx_tabs_workspace_id ON tabs(workspace_id);
       CREATE INDEX IF NOT EXISTS idx_tabs_active ON tabs(active);
+
+      CREATE TABLE IF NOT EXISTS settings (
+        key TEXT PRIMARY KEY,
+        value TEXT NOT NULL
+      );
     `)
   }
 
@@ -68,6 +73,17 @@ export class StorageManager {
       created_at: workspace.createdAt,
       last_accessed_at: workspace.lastAccessedAt
     })
+  }
+
+  setSetting(key: string, value: unknown) {
+    const stmt = this.db.prepare(`INSERT INTO settings(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value`)
+    stmt.run(key, JSON.stringify(value))
+  }
+
+  getSetting<T = unknown>(key: string): T | undefined {
+    const row = this.db.prepare(`SELECT value FROM settings WHERE key = ?`).get(key) as any
+    if (!row) return undefined
+    try { return JSON.parse(row.value) as T } catch { return undefined }
   }
 
   loadWorkspace(id: string): Workspace | null {

@@ -25,6 +25,11 @@ export class TabManager extends EventEmitter {
     return this.workspaceTabs.get(workspaceId)!
   }
 
+  setTabsForWorkspace(workspaceId: string, tabs: Tab[]) {
+    this.workspaceTabs.set(workspaceId, tabs)
+    for (const t of tabs) this.tabToWorkspace.set(t.id, workspaceId)
+  }
+
   create(workspace: Workspace, url: string): Tab {
     const tabs = this.getTabsForWorkspace(workspace.id)
     const now = Date.now()
@@ -72,6 +77,22 @@ export class TabManager extends EventEmitter {
     activeTab.lastAccessedAt = Date.now()
     this.storage.saveTabs(wsId, tabs)
     this.emit('tab-activated', activeTab)
+  }
+
+  activateNext(workspaceId: string) {
+    const tabs = this.getTabsForWorkspace(workspaceId)
+    if (tabs.length === 0) return
+    let idx = tabs.findIndex(t => t.active)
+    idx = (idx + 1) % tabs.length
+    this.activate(tabs[idx].id)
+  }
+
+  activatePrev(workspaceId: string) {
+    const tabs = this.getTabsForWorkspace(workspaceId)
+    if (tabs.length === 0) return
+    let idx = tabs.findIndex(t => t.active)
+    idx = (idx - 1 + tabs.length) % tabs.length
+    this.activate(tabs[idx].id)
   }
 
   update(tabId: string, updates: Partial<Tab>) {
