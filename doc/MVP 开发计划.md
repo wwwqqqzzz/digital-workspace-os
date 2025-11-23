@@ -1,5 +1,11 @@
 # Digital Workspace OS — MVP 开发计划
 
+> 进度摘要（2025-11-23）
+
+- 已完成：核心架构（Workspace/Tab/Storage/WebView/Window）、IPC 层（通道/处理器/Preload）、前端基础（React/Tailwind/Zustand）、地址栏与搜索（多引擎）、书签（持久化/栏/快捷键）、下载列表（暂停/继续/取消）、错误页重试、快捷键（Ctrl+T/W/Tab/Shift+Tab/1–9/L/R、Alt←/→、F12）、启动恢复与退出保存、UA/语言优化
+- 进行中：设置面板（把主页/NTP/搜索引擎/UA 迁移到独立页面）、标签右键菜单（固定/关闭其他/复制/新窗口）
+- 待规划：测试与覆盖率、打包与发布、性能采集与对比、NTP 面板
+
 > 将 MVP 拆分为可执行的开发任务，每个任务都可独立完成和测试
 
 ---
@@ -8,21 +14,21 @@
 
 ### 任务 0.1：创建项目仓库
 
-- [ ] 在 GitHub 创建仓库 `digital-workspace-os`
-- [ ] 初始化 Git 仓库
-- [ ] 创建 `.gitignore` 文件（Node.js + Electron 模板）
+- [x] 在 GitHub 创建仓库 `digital-workspace-os`
+- [x] 初始化 Git 仓库
+- [x] 创建 `.gitignore` 文件（Node.js + Electron 模板）
 - [ ] 创建 `README.md` 包含项目简介
 - [ ] 创建 `LICENSE` 文件（MIT 或 Apache 2.0）
-- [ ] 设置仓库可见性为 Public
+- [x] 设置仓库可见性为 Public
 
 ### 任务 0.2：初始化 Electron 项目
 
 - [ ] 安装 Node.js（v18+）和 npm
-- [ ] 运行 `npm init` 创建 `package.json`
-- [ ] 安装 Electron：`npm install --save-dev electron`
-- [ ] 安装 TypeScript：`npm install --save-dev typescript @types/node`
-- [ ] 创建 `tsconfig.json` 配置文件
-- [ ] 配置 TypeScript 编译选项（target: ES2020, module: commonjs）
+- [x] 运行 `npm init` 创建 `package.json`
+- [x] 安装 Electron：`npm install --save-dev electron`
+- [x] 安装 TypeScript：`npm install --save-dev typescript @types/node`
+- [x] 创建 `tsconfig.json` 配置文件
+- [x] 配置 TypeScript 编译选项（target: ES2020, module: commonjs）
 
 ### 任务 0.3：配置项目目录结构
 
@@ -36,26 +42,26 @@
 
 ### 任务 0.4：配置构建脚本
 
-- [ ] 在 `package.json` 添加 `scripts`：
+- [x] 在 `package.json` 添加 `scripts`：
   - `"dev": "tsc && electron ."`
   - `"build": "tsc"`
   - `"start": "electron ."`
-- [ ] 测试运行 `npm run build`
-- [ ] 测试运行 `npm run start`
+- [x] 测试运行 `npm run build`
+- [x] 测试运行 `npm run start`
 
 ### 任务 0.5：创建基础文件
 
-- [ ] 创建 `/src/main/index.ts`（主进程入口）
-- [ ] 创建 `/src/renderer/index.html`（UI 入口）
-- [ ] 创建 `/src/preload/index.ts`（预加载脚本）
-- [ ] 在 `package.json` 设置 `"main": "dist/main/index.js"`
+- [x] 创建 `/src/main/index.ts`（主进程入口）
+- [x] 创建 `/src/renderer/index.html`（UI 入口）
+- [x] 创建 `/src/preload/index.ts`（预加载脚本）
+- [x] 在 `package.json` 设置 "main": "dist/main/index.js"
 
 ### 任务 0.6：验证 Hello World
 
-- [ ] 在 `index.ts` 创建基础 BrowserWindow
-- [ ] 加载 `index.html`
-- [ ] 在 HTML 显示 "Hello Digital Workspace OS"
-- [ ] 运行 `npm run dev`，确认窗口打开并显示内容
+- [x] 在 `index.ts` 创建基础 BrowserWindow
+- [x] 加载 `index.html`
+- [x] 在 HTML 显示 "Hello Digital Workspace OS"
+- [x] 运行 `npm run dev`，确认窗口打开并显示内容
 
 ---
 
@@ -895,4 +901,4 @@
 ---
 
 **文档版本：** v1.1（私有版本）  
-**最后更新：** 2025-11-20
+**最后更新：** 2025-11-23
