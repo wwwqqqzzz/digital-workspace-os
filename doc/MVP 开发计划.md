@@ -666,11 +666,11 @@
 ### 任务 10.3：实现快捷键系统
 
 - [ ] 安装 electron-localshortcut 库
-- [ ] 实现全局快捷键注册
-- [ ] 实现 Ctrl+1~9 切换 Workspace
-- [ ] 实现 Ctrl+T 新建 Tab
-- [ ] 实现 Ctrl+W 关闭 Tab
-- [ ] 实现 Ctrl+Tab / Ctrl+Shift+Tab 切换 Tab
+- [x] 实现全局快捷键注册
+- [x] 实现 Ctrl+1~9 切换 Workspace
+- [x] 实现 Ctrl+T 新建 Tab
+- [x] 实现 Ctrl+W 关闭 Tab
+- [x] 实现 Ctrl+Tab / Ctrl+Shift+Tab 切换 Tab
 - [ ] 实现 Ctrl+K 打开命令面板（如果有）
 - [ ] 在设置中显示快捷键列表
 
