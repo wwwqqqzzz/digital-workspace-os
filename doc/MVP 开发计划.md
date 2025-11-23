@@ -78,33 +78,33 @@
 
 ### 任务 1.2：实现 Storage Manager（存储管理器）
 
-- [ ] 创建 `/src/main/managers/StorageManager.ts`
+- [x] 创建 `/src/main/managers/StorageManager.ts`
 - [ ] 安装 `better-sqlite3`：`npm install better-sqlite3 @types/better-sqlite3`
-- [ ] 实现 `initDatabase()` 方法（创建 SQLite 数据库）
-- [ ] 创建 `workspaces` 表
-- [ ] 创建 `tabs` 表
-- [ ] 实现 `saveWorkspace(workspace: Workspace)` 方法
-- [ ] 实现 `loadWorkspace(id: string)` 方法
-- [ ] 实现 `loadAllWorkspaces()` 方法
-- [ ] 实现 `deleteWorkspace(id: string)` 方法
-- [ ] 实现 `saveTabs(workspaceId: string, tabs: Tab[])` 方法
-- [ ] 实现 `loadTabs(workspaceId: string)` 方法
+- [x] 实现 `initDatabase()` 方法（创建 SQLite 数据库）
+- [x] 创建 `workspaces` 表
+- [x] 创建 `tabs` 表
+- [x] 实现 `saveWorkspace(workspace: Workspace)` 方法
+- [x] 实现 `loadWorkspace(id: string)` 方法
+- [x] 实现 `loadAllWorkspaces()` 方法
+- [x] 实现 `deleteWorkspace(id: string)` 方法
+- [x] 实现 `saveTabs(workspaceId: string, tabs: Tab[])` 方法
+- [x] 实现 `loadTabs(workspaceId: string)` 方法
 - [ ] 编写单元测试验证存储功能
 
 ### 任务 1.3：实现 Workspace Manager（工作空间管理器）
 
-- [ ] 创建 `/src/main/managers/WorkspaceManager.ts`
-- [ ] 实现 `create(config: WorkspaceConfig)` 方法
-- [ ] 实现 `get(id: string)` 方法
-- [ ] 实现 `list()` 方法
-- [ ] 实现 `update(id: string, updates)` 方法
-- [ ] 实现 `delete(id: string)` 方法
-- [ ] 实现 `activate(id: string)` 方法
-- [ ] 实现 `deactivate(id: string)` 方法
-- [ ] 实现 `getActive()` 方法
-- [ ] 实现事件发射器（继承 EventEmitter）
-- [ ] 在 activate 时触发 `workspace-activated` 事件
-- [ ] 将 Workspace 数据委托给 StorageManager 持久化
+- [x] 创建 `/src/main/managers/WorkspaceManager.ts`
+- [x] 实现 `create(config: WorkspaceConfig)` 方法
+- [x] 实现 `get(id: string)` 方法
+- [x] 实现 `list()` 方法
+- [x] 实现 `update(id: string, updates)` 方法
+- [x] 实现 `delete(id: string)` 方法
+- [x] 实现 `activate(id: string)` 方法
+- [x] 实现 `deactivate()` 方法
+- [x] 实现 `getActive()` 方法
+- [x] 实现事件发射器（继承 EventEmitter）
+- [x] 在 activate 时触发 `workspace-activated` 事件
+- [x] 将 Workspace 数据委托给 StorageManager 持久化
 
 ### 任务 1.4：实现 Session Controller（会话控制器）
 
@@ -120,28 +120,28 @@
 
 ### 任务 1.5：实现 Tab Manager（标签页管理器）
 
-- [ ] 创建 `/src/main/managers/TabManager.ts`
-- [ ] 实现 `create(workspaceId: string, url: string)` 方法
-- [ ] 实现 `close(tabId: string)` 方法
-- [ ] 实现 `activate(tabId: string)` 方法
-- [ ] 实现 `update(tabId: string, updates)` 方法
-- [ ] 实现 `getTabsForWorkspace(workspaceId: string)` 方法
-- [ ] 实现 `reorder(workspaceId: string, tabIds: string[])` 方法
-- [ ] 实现事件发射器
-- [ ] 触发 `tab-created`、`tab-closed`、`tab-updated` 事件
+- [x] 创建 `/src/main/managers/TabManager.ts`
+- [x] 实现 `create(workspaceId: string, url: string)` 方法
+- [x] 实现 `close(tabId: string)` 方法
+- [x] 实现 `activate(tabId: string)` 方法
+- [x] 实现 `update(tabId: string, updates)` 方法
+- [x] 实现 `getTabsForWorkspace(workspaceId: string)` 方法
+- [x] 实现 `reorder(workspaceId: string, tabIds: string[])` 方法
+- [x] 实现事件发射器
+- [x] 触发 `tab-created`、`tab-closed`、`tab-updated` 事件
 
 ### 任务 1.6：实现 WebView Pool Manager（视图池管理器）
 
-- [ ] 创建 `/src/main/managers/WebViewPoolManager.ts`
-- [ ] 实现 `create(tab: Tab, workspace: Workspace)` 方法
-- [ ] 使用 `BrowserView` 创建 WebView
-- [ ] 配置 webPreferences（partition, contextIsolation, sandbox）
-- [ ] 设置 preload 脚本路径
-- [ ] 实现 `destroy(viewId: string)` 方法
-- [ ] 实现 `getView(viewId: string)` 方法
-- [ ] 监听 WebView 的 `page-title-updated` 事件
-- [ ] 监听 WebView 的 `page-favicon-updated` 事件
-- [ ] 更新 Tab 的 title 和 favicon
+- [x] 创建 `/src/main/managers/WebViewPoolManager.ts`
+- [x] 实现 `create(tab: Tab, workspace: Workspace)` 方法
+- [x] 使用 `BrowserView` 创建 WebView
+- [x] 配置 webPreferences（partition, contextIsolation, sandbox）
+- [x] 设置 preload 脚本路径
+- [x] 实现 `destroy(viewId: string)` 方法
+- [x] 实现 `getView(viewId: string)` 方法
+- [x] 监听 WebView 的 `page-title-updated` 事件
+- [x] 监听 WebView 的 `page-favicon-updated` 事件
+- [x] 更新 Tab 的 title 和 favicon
 
 ### 任务 1.7：实现工作空间切换逻辑
 
@@ -155,16 +155,16 @@
 
 ### 任务 1.8：实现主窗口管理
 
-- [ ] 创建 `/src/main/managers/WindowManager.ts`
-- [ ] 实现 `createMainWindow()` 方法
-- [ ] 设置窗口尺寸（默认 1400x900）
-- [ ] 设置最小尺寸（1280x720）
-- [ ] 加载 `index.html`
-- [ ] 配置 webPreferences
-- [ ] 实现 `getMainWindow()` 方法
-- [ ] 实现 `setBrowserView(view: BrowserView)` 方法
-- [ ] 计算 BrowserView 的正确位置和尺寸（避免被 Sidebar 遮挡）
-- [ ] 监听窗口 resize 事件，动态调整 BrowserView 尺寸
+- [x] 创建 `/src/main/managers/WindowManager.ts`
+- [x] 实现 `createMainWindow()` 方法
+- [x] 设置窗口尺寸（默认 1400x900）
+- [x] 设置最小尺寸（1280x720）
+- [x] 加载 `index.html`
+- [x] 配置 webPreferences
+- [x] 实现 `getMainWindow()` 方法
+- [x] 实现 `setBrowserView(view: BrowserView)` 方法
+- [x] 计算 BrowserView 的正确位置和尺寸（避免被 Sidebar 遮挡）
+- [x] 监听窗口 resize 事件，动态调整 BrowserView 尺寸
 
 ---
 
@@ -172,41 +172,41 @@
 
 ### 任务 2.1：定义 IPC 通道
 
-- [ ] 创建 `/src/common/IPCChannels.ts`
-- [ ] 定义所有 IPC 通道的枚举（WORKSPACE_CREATE, WORKSPACE_LIST, TAB_CREATE 等）
-- [ ] 导出通道枚举
+- [x] 创建 `/src/common/IPCChannels.ts`
+- [x] 定义所有 IPC 通道的枚举（WORKSPACE_CREATE, WORKSPACE_LIST, TAB_CREATE 等）
+- [x] 导出通道枚举
 
 ### 任务 2.2：实现主进程 IPC 处理器
 
-- [ ] 创建 `/src/main/ipc/IPCHandler.ts`
-- [ ] 注册 `WORKSPACE_CREATE` 处理器（调用 WorkspaceManager.create）
-- [ ] 注册 `WORKSPACE_LIST` 处理器（调用 WorkspaceManager.list）
-- [ ] 注册 `WORKSPACE_UPDATE` 处理器
-- [ ] 注册 `WORKSPACE_DELETE` 处理器
-- [ ] 注册 `WORKSPACE_ACTIVATE` 处理器
-- [ ] 注册 `TAB_CREATE` 处理器（调用 TabManager.create）
-- [ ] 注册 `TAB_CLOSE` 处理器
-- [ ] 注册 `TAB_ACTIVATE` 处理器
-- [ ] 注册 `TAB_NAVIGATE` 处理器（更改 Tab 的 URL）
-- [ ] 监听 WorkspaceManager 的事件，广播到 Renderer
-- [ ] 监听 TabManager 的事件，广播到 Renderer
+- [x] 创建 `/src/main/ipc/IPCHandler.ts`
+- [x] 注册 `WORKSPACE_CREATE` 处理器（调用 WorkspaceManager.create）
+- [x] 注册 `WORKSPACE_LIST` 处理器（调用 WorkspaceManager.list）
+- [x] 注册 `WORKSPACE_UPDATE` 处理器
+- [x] 注册 `WORKSPACE_DELETE` 处理器
+- [x] 注册 `WORKSPACE_ACTIVATE` 处理器
+- [x] 注册 `TAB_CREATE` 处理器（调用 TabManager.create）
+- [x] 注册 `TAB_CLOSE` 处理器
+- [x] 注册 `TAB_ACTIVATE` 处理器
+- [x] 注册 `TAB_NAVIGATE` 处理器（更改 Tab 的 URL）
+- [x] 监听 WorkspaceManager 的事件，广播到 Renderer
+- [x] 监听 TabManager 的事件，广播到 Renderer
 
 ### 任务 2.3：实现 Preload 脚本
 
-- [ ] 编辑 `/src/preload/index.ts`
-- [ ] 使用 `contextBridge.exposeInMainWorld` 暴露 API
-- [ ] 暴露 `workspace` API（create, list, update, delete, activate）
-- [ ] 暴露 `tab` API（create, close, activate, navigate）
-- [ ] 暴露事件监听方法（onWorkspaceActivated, onTabCreated 等）
-- [ ] 定义 TypeScript 类型声明（全局 `window.electronAPI`）
+- [x] 编辑 `/src/preload/index.ts`
+- [x] 使用 `contextBridge.exposeInMainWorld` 暴露 API
+- [x] 暴露 `workspace` API（create, list, update, delete, activate）
+- [x] 暴露 `tab` API（create, close, activate, navigate）
+- [x] 暴露事件监听方法（onWorkspaceActivated, onTabCreated 等）
+- [x] 定义 TypeScript 类型声明（全局 `window.electronAPI`）
 
 ### 任务 2.4：验证 IPC 通信
 
-- [ ] 在 Renderer 中调用 `window.electronAPI.workspace.list()`
-- [ ] 使用 `console.log` 打印返回的 Workspace 列表
-- [ ] 在 Renderer 中调用 `window.electronAPI.workspace.create({...})`
-- [ ] 验证新 Workspace 被成功创建
-- [ ] 验证事件监听（如 `onWorkspaceActivated`）正常工作
+- [x] 在 Renderer 中调用 `window.electronAPI.workspace.list()`
+- [x] 使用 `console.log` 打印返回的 Workspace 列表
+- [x] 在 Renderer 中调用 `window.electronAPI.workspace.create({...})`
+- [x] 验证新 Workspace 被成功创建
+- [x] 验证事件监听（如 `onWorkspaceActivated`）正常工作
 
 ---
 
@@ -254,23 +254,23 @@
 
 ### 任务 3.5：创建 App 组件
 
-- [ ] 创建 `/src/renderer/App.tsx`
-- [ ] 实现布局结构（Sidebar + MainContent）
-- [ ] 使用 Flexbox 布局（flex h-screen）
-- [ ] 在 `useEffect` 中加载 Workspaces
-- [ ] 调用 `window.electronAPI.workspace.list()`
-- [ ] 更新 Zustand store 的 workspaces 状态
-- [ ] 监听 `onWorkspaceActivated` 事件
-- [ ] 更新 activeWorkspace 和 tabs 状态
+- [x] 创建 `/src/renderer/App.tsx`
+- [x] 实现布局结构（Sidebar + MainContent）
+- [x] 使用 Flexbox 布局（flex h-screen）
+- [x] 在 `useEffect` 中加载 Workspaces
+- [x] 调用 `window.electronAPI.workspace.list()`
+- [x] 更新 Zustand store 的 workspaces 状态
+- [x] 监听 `onWorkspaceActivated` 事件
+- [x] 更新 activeWorkspace 和 tabs 状态
 
 ### 任务 3.6：创建 Sidebar 组件
 
-- [ ] 创建 `/src/renderer/components/Sidebar.tsx`
-- [ ] 从 Zustand 读取 workspaces 和 activeWorkspace
-- [ ] 渲染 Workspace 列表
-- [ ] 渲染"Add Workspace"按钮
-- [ ] 实现点击 Workspace 时调用 `window.electronAPI.workspace.activate(id)`
-- [ ] 高亮当前活动的 Workspace
+- [x] 创建 `/src/renderer/components/Sidebar.tsx`
+- [x] 从 Zustand 读取 workspaces 和 activeWorkspace
+- [x] 渲染 Workspace 列表
+- [x] 渲染"Add Workspace"按钮
+- [x] 实现点击 Workspace 时调用 `window.electronAPI.workspace.activate(id)`
+- [x] 高亮当前活动的 Workspace
 - [ ] 支持折叠/展开（根据 sidebarCollapsed 状态）
 
 ### 任务 3.7：创建 WorkspaceItem 组件
@@ -285,21 +285,21 @@
 
 ### 任务 3.8：创建 MainContent 组件
 
-- [ ] 创建 `/src/renderer/components/MainContent.tsx`
-- [ ] 包含 TabBar 组件
-- [ ] 包含 WebViewContainer 占位符
-- [ ] 使用 flex-1 占据剩余空间
+- [x] 创建 `/src/renderer/components/MainContent.tsx`
+- [x] 包含 TabBar 组件
+- [x] 包含 WebViewContainer 占位符
+- [x] 使用 flex-1 占据剩余空间
 
 ### 任务 3.9：创建 TabBar 组件
 
-- [ ] 创建 `/src/renderer/components/TabBar.tsx`
-- [ ] 从 Zustand 读取 tabs 和 activeTab
-- [ ] 渲染 Tab 列表
-- [ ] 渲染"+ New Tab"按钮
-- [ ] 实现点击 Tab 时调用 `window.electronAPI.tab.activate(id)`
-- [ ] 实现点击"+"时调用 `window.electronAPI.tab.create(workspaceId, 'about:blank')`
-- [ ] 实现关闭按钮（×）
-- [ ] 支持水平滚动（overflow-x-auto）
+- [x] 创建 `/src/renderer/components/TabBar.tsx`
+- [x] 从 Zustand 读取 tabs 和 activeTab
+- [x] 渲染 Tab 列表
+- [x] 渲染"+ New Tab"按钮
+- [x] 实现点击 Tab 时调用 `window.electronAPI.tab.activate(id)`
+- [x] 实现点击"+"时调用 `window.electronAPI.tab.create('https://example.com')`
+- [x] 实现关闭按钮（×）
+- [x] 支持水平滚动（overflow-x-auto）
 
 ### 任务 3.10：创建 TabItem 组件
 
@@ -313,20 +313,20 @@
 
 ### 任务 3.11：创建 WebViewContainer 组件
 
-- [ ] 创建 `/src/renderer/components/WebViewContainer.tsx`
-- [ ] 显示占位文本："WebView will be displayed here"
-- [ ] （注意：实际 WebView 由主进程的 BrowserView 控制，这里只是占位）
-- [ ] 添加加载指示器（可选）
+- [x] 创建 `/src/renderer/components/WebViewContainer.tsx`
+- [x] 显示占位文本："WebView will be displayed here"
+- [x] （注意：实际 WebView 由主进程的 BrowserView 控制，这里只是占位）
+- [x] 添加加载指示器（可选）
 
 ### 任务 3.12：实现初始化默认 Workspaces
 
-- [ ] 在 App 组件的 `useEffect` 中检查 Workspace 数量
-- [ ] 如果为 0，创建 4 个默认 Workspace
-- [ ] Workspace 1：名称"Work"，图标"💼"，颜色"#3B82F6"
-- [ ] Workspace 2：名称"Personal"，图标"🏠"，颜色"#10B981"
-- [ ] Workspace 3：名称"Web3"，图标"🔗"，颜色"#8B5CF6"
-- [ ] Workspace 4：名称"Study"，图标"📚"，颜色"#F59E0B"
-- [ ] 自动激活第一个 Workspace
+- [x] 在 App 组件的 `useEffect` 中检查 Workspace 数量
+- [x] 如果为 0，创建 4 个默认 Workspace
+- [x] Workspace 1：名称"Work"，图标"💼"，颜色"#3B82F6"
+- [x] Workspace 2：名称"Personal"，图标"🏠"，颜色"#10B981"
+- [x] Workspace 3：名称"Web3"，图标"🔗"，颜色"#8B5CF6"
+- [x] Workspace 4：名称"Study"，图标"📚"，颜色"#F59E0B"
+- [x] 自动激活第一个 Workspace
 
 ---
 
@@ -361,19 +361,19 @@
 
 ### 任务 4.4：实现 Tab 导航功能
 
-- [ ] 在 TabBar 添加地址栏（当 Tab 活动时显示）
-- [ ] 输入 URL 后按 Enter
-- [ ] 调用 `window.electronAPI.tab.navigate(tabId, url)`
-- [ ] 在主进程中实现 `navigate()` 方法
-- [ ] 调用 `BrowserView.webContents.loadURL(url)`
+- [x] 在 TabBar 添加地址栏（当 Tab 活动时显示）
+- [x] 输入 URL 后按 Enter
+- [x] 调用 `window.electronAPI.tab.navigate(tabId, url)`
+- [x] 在主进程中实现 `navigate()` 方法
+- [x] 调用 `BrowserView.webContents.loadURL(url)`
 
 ### 任务 4.5：实现 Tab 关闭功能
 
-- [ ] 在 TabItem 添加关闭按钮
-- [ ] 点击时调用 `window.electronAPI.tab.close(tabId)`
-- [ ] 在主进程销毁对应的 BrowserView
-- [ ] 从 Zustand store 移除 Tab
-- [ ] 如果关闭的是活动 Tab，激活相邻的 Tab
+- [x] 在 TabItem 添加关闭按钮
+- [x] 点击时调用 `window.electronAPI.tab.close(tabId)`
+- [x] 在主进程销毁对应的 BrowserView
+- [x] 从 Zustand store 移除 Tab
+- [x] 如果关闭的是活动 Tab，激活相邻的 Tab
 
 ### 任务 4.6：实现会话保存和恢复
 
@@ -388,17 +388,17 @@
 
 ### 任务 4.7：实现应用启动恢复
 
-- [ ] 在主进程启动时调用 `StorageManager.loadAllWorkspaces()`
-- [ ] 加载所有 Workspace
-- [ ] 恢复上次活动的 Workspace
-- [ ] 恢复该 Workspace 的所有 Tabs
+- [x] 在主进程启动时调用 `StorageManager.loadAllWorkspaces()`
+- [x] 加载所有 Workspace
+- [x] 恢复上次活动的 Workspace
+- [x] 恢复该 Workspace 的所有 Tabs
 
 ### 任务 4.8：实现应用退出保存
 
-- [ ] 监听 `app.on('before-quit')` 事件
-- [ ] 保存当前活动的 Workspace ID
-- [ ] 保存所有 Workspace 的 Tabs 状态
-- [ ] 调用 StorageManager 持久化数据
+- [x] 监听 `app.on('before-quit')` 事件
+- [x] 保存当前活动的 Workspace ID
+- [x] 保存所有 Workspace 的 Tabs 状态
+- [x] 调用 StorageManager 持久化数据
 
 ---
 
